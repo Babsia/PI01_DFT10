@@ -16,6 +16,10 @@ def traductor_mes():
     meses = {'January':'Enero', 'February':'Febrero', 'March':'Marzo', 'April':'Abril', 'May':'Mayo', 'June':'Junio', 'July':'Julio', 'August':'Agosto', 'September':'Septiembre', 'October':'Octubre', 'November':'Noviembre', 'December':'Diciembre'}
     df['release_month'] = df['release_month'].map(meses)
 traductor_mes()
+def traductor_dia():
+    dias = {'Monday':'Lunes', 'Tuesday':'Martes', 'Wednesday':'Miercoles', 'Thursday':'Jueves', 'Friday':'Viernes', 'Saturday':'Sabado', 'Sunday':'Domingo'}
+    df['release_day'] = df['release_day'].map(dias)
+traductor_dia()
 
 @app.get("peliculas_mes/{mes}")
 def peliculas_mes(mes="Enero"):
