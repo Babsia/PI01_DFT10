@@ -3,6 +3,8 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import pandas as pd
 import datetime as dt
+import locale
+locale.setlocale(locale.LC_TIME, 'es_ES.utf8')
 
 app = FastAPI()
 
