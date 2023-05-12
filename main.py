@@ -10,8 +10,12 @@ app = FastAPI()
 
 df = pd.read_csv('datasets/movies_clean.csv')
 df['release_date'] = pd.to_datetime(df['release_date'])
-df['release_month'] = df['release_date'].dt.month_name(locale='es')
-df['release_day'] = df['release_date'].dt.day_name(locale='es')
+df['release_month'] = df['release_date'].dt.month_name()
+df['release_day'] = df['release_date'].dt.day_name()
+def traductor_mes():
+    meses = {'January':'Enero', 'February':'Febrero', 'March':'Marzo', 'April':'Abril', 'May':'Mayo', 'June':'Junio', 'July':'Julio', 'August':'Agosto', 'September':'Septiembre', 'October':'Octubre', 'November':'Noviembre', 'December':'Diciembre'}
+    df['release_month'] = df['release_month'].map(meses)
+traductor_mes()
 
 @app.get("peliculas_mes/{mes}")
 def peliculas_mes(mes="Enero"):
