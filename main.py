@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import pandas as pd
 import datetime as dt
 import locale
-locale.setlocale(locale.LC_TIME, 'en_US.utf8')
+
 
 app = FastAPI()
 
