@@ -21,13 +21,13 @@ def traductor_dia():
     df['release_day'] = df['release_day'].map(dias)
 traductor_dia()
 
-@app.get("peliculas_mes/{mes}")
+@app.get("/peliculas_mes/{mes}")
 def peliculas_mes(mes):
     # Obtiene la cantidad de películas estrenadas en el mes especificado
     df_mes = df[df['release_month'] == mes]
     cantidad = len(df_mes)
     return {'mes':mes, 'cantidad':cantidad}
-@app.get("peliculas_dia/{dia}")
+@app.get("/peliculas_dia/{dia}")
 def peliculas_dia(dia):
     # Obtiene la cantidad de películas estrenadas en el día especificado
     df_dia = df[df['release_day'] == dia]
