@@ -22,19 +22,19 @@ def traductor_dia():
 traductor_dia()
 
 @app.get("peliculas_mes/{mes}")
-def peliculas_mes(mes="Enero"):
+def peliculas_mes(mes):
     # Obtiene la cantidad de películas estrenadas en el mes especificado
     df_mes = df[df['release_month'] == mes]
     cantidad = len(df_mes)
     return {'mes':mes, 'cantidad':cantidad}
 @app.get("peliculas_dia/{dia}")
-def peliculas_dia(dia="Lunes"):
+def peliculas_dia(dia):
     # Obtiene la cantidad de películas estrenadas en el día especificado
     df_dia = df[df['release_day'] == dia]
     cantidad = len(df_dia)
     return {'dia':dia, 'cantidad':cantidad}
 @app.get("/franquicia/{franquicia}")
-def franquicia(franquicia="Toy Story Collection"):
+def franquicia(franquicia):
     # Obtiene la cantidad de películas, la ganancia total y el promedio de ganancias para la franquicia especificada
     df_franquicia = df[df['collection_name'] == franquicia]
     cantidad = len(df_franquicia)
@@ -42,13 +42,13 @@ def franquicia(franquicia="Toy Story Collection"):
     ganancia_promedio = df_franquicia['revenue'].mean()
     return {'franquicia':franquicia, 'cantidad':cantidad, 'ganancia_total':ganancia_total, 'ganancia_promedio':ganancia_promedio}
 @app.get("/peliculas_pais/{pais}")
-def peliculas_pais(pais="United States of America"):
+def peliculas_pais(pais):
     # Obtiene la cantidad de películas producidas en el país especificado
     df_pais = df[df['country'] == pais]
     cantidad = len(df_pais)
     return {'pais':pais, 'cantidad':cantidad}
 @app.get("/productoras/{productora}")
-def productoras(productora="Pixar Animation Studios"):
+def productoras(productora):
     #productio_companies_name esta en el dataset como una lista con todas las productoras de la pelicula, por lo que se debe buscar en cada lista si esta la productora
     df_productora = df[df['production_companies_names'].str.contains(productora)]
     cantidad = len(df_productora)
@@ -56,7 +56,7 @@ def productoras(productora="Pixar Animation Studios"):
     return {'productora':productora, 'ganancia_total':ganancia_total, 'cantidad':cantidad}
 
 @app.get("/retorno/{pelicula}")
-def retorno(pelicula="Toy Story 3"):
+def retorno(pelicula):
     #def retorno(pelicula): '''Ingresas la pelicula, retornando la inversion, la ganancia, el retorno y el año en el que se lanzo''' return {'pelicula':pelicula, 'inversion':respuesta, 'ganacia':respuesta,'retorno':respuesta, 'anio':respuesta}
     df_pelicula = df[df['title'] == pelicula]
     inversion = df_pelicula['budget'].sum()
