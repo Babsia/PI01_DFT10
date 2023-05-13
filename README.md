@@ -1,32 +1,38 @@
 # PI01_DFT10.
 
-Recomendador de películas y series
+#Proyecto de recomendación de películas
+Este proyecto consiste en la creación de un sistema de recomendación de películas para una start-up que provee servicios de agregación de plataformas de streaming. En este README se describe el proceso seguido para la implementación del sistema de recomendación, así como la creación de una API para acceder a los datos de la empresa.
 
-Descripción
-Este proyecto consiste en la creación de un modelo de recomendación de películas y series para una startup que provee servicios de agregación de plataformas de streaming. El modelo es capaz de proporcionar recomendaciones personalizadas para cada usuario en función de sus preferencias y comportamiento previo.
+#Requerimientos
+Para la implementación de este proyecto se han utilizado las siguientes herramientas y tecnologías:
 
-Ciclo de vida del proyecto
-Este proyecto sigue un ciclo de vida completo de un proyecto de Machine Learning. Incluye desde el tratamiento y recolección de los datos (Data Engineer stuff) hasta el entrenamiento y mantenimiento del modelo de ML según llegan nuevos datos.
+Python 3.x
+Pandas
+FastAPI
+Render
+#Transformaciones de datos
+Se han realizado las siguientes transformaciones en los datos para prepararlos para su uso en el modelo de recomendación:
 
-Rol desempeñado
-El objetivo de este proyecto era crear un sistema de recomendación de películas y series como Data Scientist en una startup. En este rol, se llevó a cabo la tarea de transformar los datos, desarrollar una API, realizar el análisis exploratorio de datos y proporcionar soluciones de implementación.
+Desanidar los campos "belongs_to_collection" y "production_companies" para poder unirlos al dataset y hacer consultas a la API.
+Rellenar los valores nulos de los campos "revenue" y "budget" con el número 0.
+Eliminar los valores nulos del campo "release date".
+Dar formato AAAA-mm-dd a las fechas del campo "release date" y crear la columna "release_year" donde se extrae el año de la fecha de estreno.
+Crear la columna "return" con el retorno de inversión, calculando la división entre "revenue" y "budget". En caso de que no haya datos disponibles para calcularlo, se toma el valor 0.
+Eliminar las columnas que no serán utilizadas: "video", "imdb_id", "adult", "original_title", "vote_count", "poster_path" y "homepage".
+#Desarrollo de la API
+Se ha propuesto disponibilizar los datos de la empresa mediante el framework FastAPI, creando 6 funciones para los endpoints que se consumirán en la API:
 
-Transformaciones
-Para el MVP, se realizaron las siguientes transformaciones a los datos:
+peliculas_mes(mes): se ingresa el mes y la función retorna la cantidad de películas que se estrenaron ese mes (nombre del mes, en str, ejemplo 'enero') históricamente.
+peliculas_dia(dia): se ingresa el día y la función retorna la cantidad de películas que se estrenaron ese día (de la semana, en str, ejemplo 'lunes') históricamente.
+franquicia(franquicia): se ingresa la franquicia, retornando la cantidad de películas, ganancia total y promedio.
+peliculas_pais(pais): se ingresa el país, retornando la cantidad de películas producidas en el mismo.
+productoras(productora): se ingresa la productora, retornando la ganancia total y la cantidad de películas que produjeron.
+retorno(pelicula): se ingresa la película, retornando la inversión, la ganancia, el retorno y el año en el que se lanzó.
+#Deployment
+Se ha utilizado Render para desplegar la API y permitir que sea consumida desde la web.
 
-Desanidar algunos campos, como belongs_to_collection, production_companies, y otros, para poder unirlos al dataset de nuevo hacer alguna de las consultas de la API.
-Rellenar los valores nulos de los campos revenue y budget con el número 0.
-Eliminar los valores nulos del campo release date.
-Formatear las fechas con el formato AAAA-mm-dd y crear la columna release_year donde extraerán el año de la fecha de estreno.
-Crear la columna return con el retorno de inversión, dividiendo los campos revenue y budget. Cuando no hay datos disponibles para calcularlo, se tomará el valor 0.
-Eliminar las columnas que no serán utilizadas, video, imdb_id, adult, original_title, vote_count, poster_path y homepage.
-Desarrollo de la API
-Se desarrolló una API para acceder a los datos de la empresa utilizando el framework FastAPI. Las consultas disponibles son las siguientes:
+#Análisis exploratorio de datos
+Se ha realizado un análisis exploratorio de los datos para investigar las relaciones que hay entre las variables de los datasets, ver si hay outliers o anomalías y ver si hay algún patrón interesante que valga la pena explorar en un análisis.
 
-peliculas_mes(mes): Esta función retorna la cantidad de películas que se estrenaron en un mes determinado históricamente. Se ingresa el mes en formato string, ejemplo 'enero'.
-peliculas_dia(dia): Esta función retorna la cantidad de películas que se estrenaron en un día determinado de la semana históricamente. Se ingresa el día de la semana en formato string, ejemplo 'lunes'.
-franquicia(franquicia): Esta función retorna la cantidad de películas, la ganancia total y el promedio de ganancia de una franquicia determinada. Se ingresa el nombre de la franquicia en formato string.
-peliculas_pais(pais): Esta función retorna la cantidad de películas producidas en un país determinado. Se ingresa el nombre del país en formato string.
-productoras(productora): Esta función retorna la ganancia total y la cantidad de películas que produjo una productora determinada. Se ingresa el nombre de la productora en formato string.
-retorno(pelicula): Esta función retorna la inversión, la ganancia, el retorno y el año de lanzamiento de una película determinada. Se ingresa el nombre de la película en formato string.
-Para cada función, se implementó un decorador @app.get() en la API.
+#Conclusión
+Se ha creado un sistema de recomendación de películas y una API para acceder a los datos de la empresa. Se han realizado transformaciones de los datos para prepararlos para su uso en el modelo de recomendación, se ha desplegado la API en Render y se ha realizado un análisis exploratorio de los datos para investigar las relaciones que hay entre las variables. Este proyecto ha permitido mejorar los servicios de la start-up de agregación de plataformas de streaming y proporcionar recomendaciones de películas más precisas y personalizadas a los usuarios. Además, la creación de la API permite el acceso a los datos de la empresa de manera más sencilla y eficiente. En resumen, este proyecto ha sido una contribución valiosa para mejorar la calidad del servicio ofrecido por la start-up.
