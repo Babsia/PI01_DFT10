@@ -60,6 +60,10 @@ def productoras(productora):
 
 @app.get("/retorno/{pelicula}")
 def retorno(pelicula):
+    df['budget'] = df['budget'].astype('float64')
+    df['revenue'] = df['revenue'].astype('float64')
+    df['return'] = df['return'].astype('float64')
+    df['release_year'] = df['release_year'].astype('str')
     
     df_pelicula = df[df['title'] == pelicula]
     inversion = df_pelicula['budget'].sum()
