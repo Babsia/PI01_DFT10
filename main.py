@@ -129,47 +129,4 @@ def Movies_ML(selected_title):
 
 
 
-'''@app.get("/peliculas_dia/{dia}")
-def peliculas_dia(dia: str):
-    respuesta = 0
-    # Obtiene la cantidad de películas estrenadas en el día especificado
-    # Puedes implementar la lógica para obtener esta información desde el dataframe aquí
-    return {'dia':dia, 'cantidad':respuesta}
 
-# Función para obtener información sobre una franquicia
-@app.get("/franquicia/{franquicia}")
-def franquicia(franquicia: str):
-    respuesta_cantidad = 0
-    respuesta_ganancia_total = 0
-    respuesta_ganancia_promedio = 0
-    # Obtiene la cantidad de películas, la ganancia total y el promedio de ganancias para la franquicia especificada
-    # Puedes implementar la lógica para obtener esta información desde el dataframe aquí
-    return {'franquicia':franquicia, 'cantidad':respuesta_cantidad, 'ganancia_total':respuesta_ganancia_total, 'ganancia_promedio':respuesta_ganancia_promedio}
-
-# Función para obtener cantidad de películas producidas en un país
-@app.get("/peliculas_pais/{pais}")
-def peliculas_pais(pais: str):
-    respuesta = 0
-    # Obtiene la cantidad de películas producidas en el país especificado
-    # Puedes implementar la lógica para obtener esta información desde el dataframe aquí
-    return {'pais':pais, 'cantidad':respuesta}
-
-# Función para obtener información sobre una productora
-@app.get("/productoras/{productora}")
-def productoras(productora: str):
-    respuesta_cantidad = 0
-    respuesta_ganancia_total = 0
-    # Obtiene la cantidad de películas producidas y la ganancia total para la productora especificada
-    # Puedes implementar la lógica para obtener esta información desde el dataframe aquí
-    return {'productora':productora, 'ganancia_total':respuesta_ganancia_total, 'cantidad':respuesta_cantidad}
-
-# Función para obtener información sobre una película específica
-@app.get("/retorno/{pelicula}")
-def retorno(pelicula: str):
-    respuesta_inversion = 0
-    respuesta_ganancia = 0
-    respuesta_retorno = 0
-    respuesta_anio = 0
-    # Obtiene información sobre la inversión, ganancia, retorno y año de una película específica
-    # Puedes implementar la lógica para obtener esta información desde el dataframe aquí
-    return {'pelicula':pelicula, 'inversion':respuesta_inversion, 'ganacia':respuesta_ganancia,'retorno':respuesta_retorno, 'anio':respuesta_anio}'''
