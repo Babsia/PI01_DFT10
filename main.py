@@ -4,6 +4,9 @@ from pydantic import BaseModel
 import pandas as pd
 import datetime as dt
 import locale
+import ast
+from sklearn.neighbors import NearestNeighbors
+
 
 
 app = FastAPI()
