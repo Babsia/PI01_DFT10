@@ -1,4 +1,4 @@
-# PI01_DFT10.
+# PROYECTO INDIVIDUAL HENRRY ML
 
 # Proyecto de recomendación de películas
 Este proyecto consiste en la creación de un sistema de recomendación de películas para una start-up que provee servicios de agregación de plataformas de streaming. En este README se describe el proceso seguido para la implementación del sistema de recomendación, así como la creación de una API para acceder a los datos de la empresa.
