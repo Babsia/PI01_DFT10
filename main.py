@@ -69,7 +69,7 @@ def retorno(pelicula):
     inversion = df_pelicula['budget'].sum()
     ganancia = df_pelicula['revenue'].sum()-inversion
     retorno = df_pelicula['return'].sum()
-    anio = df_pelicula['release_year'].sum()
+    anio = df_pelicula['release_year']
     
     return {'pelicula':pelicula, 'inversion':inversion, 'ganacia':ganancia,'retorno':retorno, 'año':anio}
 @app.get("/peliculas_recomendadas/{pelicula}")
