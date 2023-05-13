@@ -65,6 +65,57 @@ def retorno(pelicula):
     anio = df_pelicula['release_year'].sum()
     
     return {'pelicula':pelicula, 'inversion':inversion, 'ganacia':ganancia,'retorno':retorno, 'año':anio}
+@app.get("/peliculas_recomendadas/{pelicula}")
+def Movies_ML(selected_title):
+    df = pd.read_csv('datasets/movies_clean.csv')
+    print(df['title'].head())
+    df['tagline'] = df['tagline'].fillna('')
+    
+    # Drop rows with missing values in important columns
+    df = df.dropna(subset=['overview', 'tagline', 'genre_names', 'title', 'id'])
+    
+    # Create a dataframe with dummy variables for genres
+    generos_df = df['genre_names'].str.join(sep='|').str.get_dummies()
+    
+    # Compute genre similarity between movies
+    selected_genres = df.loc[df['title'] == selected_title]['genre_names'].values
+    if len(selected_genres) == 0:
+        return "No se encontró la película " + selected_title
+    selected_genres = ast.literal_eval(selected_genres[0])
+    df['genre_similarity'] = df['genre_names'].apply(lambda x: len(set(selected_genres) & set(ast.literal_eval(x))) / len(set(selected_genres) | set(ast.literal_eval(x))))
+    
+    # Create a binary variable indicating whether movies belong to the same series
+    df['same_series'] = df['title'].apply(lambda x: 1 if selected_title.lower() in x.lower() else 0)
+    
+    # Create a dataframe with all the relevant features
+    features_df = pd.concat([generos_df, df['vote_average'], df['genre_similarity'], df['same_series']], axis=1)
+
+    # Compute similar movies using k-NN
+    k = 6
+    knn = NearestNeighbors(n_neighbors=k+1, algorithm='auto')
+    knn.fit(features_df)
+    indices = knn.kneighbors(features_df.loc[df['title'] == selected_title])[1].flatten()
+    recommended_movies = list(df.iloc[indices]['title'])
+
+    # Sort recommended movies by relevance
+    selected_score = df.loc[df['title'] == selected_title]['vote_average'].values[0]
+    recommended_movies = sorted(recommended_movies, key=lambda x: (df.loc[df['title'] == x]['same_series'].values[0], df.loc[df['title'] == x]['vote_average'].values[0], df.loc[df['title'] == x]['genre_similarity'].values[0]), reverse=True)
+    recommended_movies = [movie for movie in recommended_movies if movie != selected_title]
+
+    # Print recommended movies
+    if len(recommended_movies) == 0:
+        return "No se encontraron películas similares a " + selected_title
+    else:
+        output_str = f"Película seleccionada: {selected_title} ({selected_score}):\n\nPelículas Recomendadas:\n"
+        for i, pelicula in enumerate(recommended_movies[:5]):
+            score = df.loc[df['title'] == pelicula]['vote_average'].values[0]
+            genres = df.loc[df['title'] == pelicula]['genre_names'].values[0]
+            gen_str = ', '.join(ast.literal_eval(genres))
+
+            output_str += f"-{pelicula}  | Géneros: {gen_str} | Puntaje: {score} |\n"
+            if i == 4:
+                break
+        return output_str
 
 
 
