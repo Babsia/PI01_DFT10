@@ -60,10 +60,10 @@ def productoras(productora):
 
 @app.get("/retorno/{pelicula}")
 def retorno(pelicula):
-    #def retorno(pelicula): '''Ingresas la pelicula, retornando la inversion, la ganancia, el retorno y el año en el que se lanzo''' return {'pelicula':pelicula, 'inversion':respuesta, 'ganacia':respuesta,'retorno':respuesta, 'anio':respuesta}
+    
     df_pelicula = df[df['title'] == pelicula]
     inversion = df_pelicula['budget'].sum()
-    ganancia = df_pelicula['revenue'].sum()
+    ganancia = df_pelicula['revenue'].sum()-inversion
     retorno = df_pelicula['return'].sum()
     anio = df_pelicula['release_year'].sum()
     
