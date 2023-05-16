@@ -132,6 +132,7 @@ def Movies_ML(selected_title):
 router = APIRouter()
 
 def ping_my_api():
+    print("se hizo ping")
     while True:
         # Make a ping request to your own API
         response = requests.get('https://pibabsia2.onrender.com/ping')
