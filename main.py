@@ -123,6 +123,31 @@ def Movies_ML(selected_title):
             if i == 4:
                 break
         return output_str
+router = APIRouter()
+
+def ping_my_api():
+    while True:
+        # Make a ping request to your own API
+        response = requests.get('https://pibabsia2.onrender.com/ping')
+        print('Ping executed:', response.status_code)
+        time.sleep(300)  # Wait for 5 minutes before the next ping
+
+async def run_background_task():
+    while True:
+        background_task = asyncio.create_task(ping_my_api())
+        await asyncio.sleep(300)  # Wait for 5 minutes before starting the next task
+
+@app.get("/ping")
+async def ping():
+    return {"message": "pong"}
+
+@app.get("/start_ping_task")
+async def start_ping(background_tasks: BackgroundTasks):
+    background_tasks.add_task(run_background_task)
+    return {"message": "Ping task started"}
+
+if __name__ == "__main__":
+    asyncio.run(run_background_task())
 
 
 
