@@ -6,6 +6,12 @@ import datetime as dt
 import locale
 import ast
 from sklearn.neighbors import NearestNeighbors
+import requests
+from fastapi.routing import APIRouter
+from fastapi import BackgroundTasks
+import time
+import asyncio
+
 
 
 
