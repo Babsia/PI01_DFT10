@@ -36,3 +36,6 @@ Se ha realizado un análisis exploratorio de los datos para investigar las relac
 
 # Conclusión
 Se ha creado un sistema de recomendación de películas y una API para acceder a los datos de la empresa. Se han realizado transformaciones de los datos para prepararlos para su uso en el modelo de recomendación, se ha desplegado la API en Render y se ha realizado un análisis exploratorio de los datos para investigar las relaciones que hay entre las variables. Este proyecto ha permitido mejorar los servicios de la start-up de agregación de plataformas de streaming y proporcionar recomendaciones de películas más precisas y personalizadas a los usuarios. Además, la creación de la API permite el acceso a los datos de la empresa de manera más sencilla y eficiente. En resumen, este proyecto ha sido una contribución valiosa para mejorar la calidad del servicio ofrecido por la start-up.
+
+
+NOTA:Al usar render puede ocurrir que el web service se apague por inactividad ya que estoy usando una version gratis de render si esto pasa hay veces que esperando un rato vuelve a deployarse solo y si no mi contaco es Santiagobabsia@gmail.com
